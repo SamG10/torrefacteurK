@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "132923279838",
+    "project_id": "torrefacteur-k",
+    "storage_bucket": "torrefacteur-k.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132923279838:android:e4ad539dd5cff5ddeaf54f",
+        "android_client_info": {
+          "package_name": "com.example.torrefacteurk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpW4QkFqnD_rWqxD0xNzbassTZ3BcJso8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
