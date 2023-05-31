@@ -52,6 +52,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '132923279838',
     projectId: 'torrefacteur-k',
     authDomain: 'torrefacteur-k.firebaseapp.com',
+    databaseURL: 'https://torrefacteur-k-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'torrefacteur-k.appspot.com',
     measurementId: 'G-6P875REHMD',
   );
@@ -61,6 +62,7 @@ class DefaultFirebaseOptions {
     appId: '1:132923279838:android:e4ad539dd5cff5ddeaf54f',
     messagingSenderId: '132923279838',
     projectId: 'torrefacteur-k',
+    databaseURL: 'https://torrefacteur-k-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'torrefacteur-k.appspot.com',
   );
 
@@ -69,6 +71,7 @@ class DefaultFirebaseOptions {
     appId: '1:132923279838:ios:3d3df3890b40687aeaf54f',
     messagingSenderId: '132923279838',
     projectId: 'torrefacteur-k',
+    databaseURL: 'https://torrefacteur-k-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'torrefacteur-k.appspot.com',
     iosBundleId: 'com.example.torrefacteurk',
   );

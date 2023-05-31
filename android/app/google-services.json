@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "132923279838",
+    "firebase_url": "https://torrefacteur-k-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "torrefacteur-k",
     "storage_bucket": "torrefacteur-k.appspot.com"
   },

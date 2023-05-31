@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:torrefacteurk/firebase_options.dart';
 import 'package:torrefacteurk/views/widgets/widgetTree.dart';
 
 Future<void> main() async {
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Lato',
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.brown,
       ),
       home: const WidgetTree(),
     );

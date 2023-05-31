@@ -16,6 +16,9 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
 
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerPseudo = TextEditingController();
+  final TextEditingController _controllerFirstName = TextEditingController();
+  final TextEditingController _controllerLastName = TextEditingController();
 
   Future signInWithEmailAndPassword() async {
     try {
@@ -44,6 +47,21 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
   }
 
   Widget _entryField(String title, TextEditingController controller) {
+    if (title == "password") {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          obscureText: true,
+          enableSuggestions: false,
+          autocorrect: false,
+          controller: controller,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            hintText: title,
+          ),
+        ),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
@@ -62,10 +80,15 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
 
   Widget _submitButton() {
     return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
         onPressed: isLogin
             ? signInWithEmailAndPassword
             : createUserWithEmailAndPassword,
-        child: Text(isLogin ? 'Login' : 'Register'));
+        child: Text(
+          isLogin ? 'Login' : 'Register',
+          style: TextStyle(fontSize: 20),
+        ));
   }
 
   Widget _loginOrRegisterButton() {
@@ -75,7 +98,38 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
             isLogin = !isLogin;
           });
         },
-        child: Text(isLogin ? 'Register' : 'Login'));
+        child: Text(isLogin ? "Register" : "Login"));
+  }
+
+  Widget _formAuth() {
+    if (isLogin) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _entryField('email', _controllerEmail),
+          _entryField('password', _controllerPassword),
+          _errorMessage(),
+          _submitButton(),
+          _loginOrRegisterButton()
+        ],
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _entryField('email', _controllerEmail),
+          _entryField('password', _controllerPassword),
+          _entryField('pseudo', _controllerPseudo),
+          _entryField('firstName', _controllerFirstName),
+          _entryField('lastName', _controllerLastName),
+          _errorMessage(),
+          _submitButton(),
+          _loginOrRegisterButton()
+        ],
+      );
+    }
   }
 
   @override
@@ -87,20 +141,10 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
           elevation: 0.0,
           centerTitle: true),
       body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _entryField('email', _controllerEmail),
-            _entryField('password', _controllerPassword),
-            _errorMessage(),
-            _submitButton(),
-            _loginOrRegisterButton()
-          ],
-        ),
+          height: double.infinity,
+          width: double.infinity,
+          padding: EdgeInsets.all(10),
+          child: _formAuth()
       ),
     );
   }
