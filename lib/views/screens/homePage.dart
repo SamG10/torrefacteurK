@@ -3,8 +3,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:torrefacteurk/auth.dart';
-import 'package:torrefacteurk/views/screens/authenticationPage.dart';
-import 'package:torrefacteurk/views/screens/test.dart';
+import 'package:torrefacteurk/views/screens/gamePage.dart';
+import 'package:torrefacteurk/views/screens/rankingPage.dart';
+import 'package:torrefacteurk/views/screens/shopPage.dart';
+import 'package:torrefacteurk/views/screens/stockPage.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -15,8 +17,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final User? user = Auth().currentUser;
-
   final databaseReference = FirebaseDatabase.instance.ref();
+
+  int _selectedTab = 0;
+
+  List _pages = [
+    GamePage(),
+    ShopPage(),
+    RankingPage(),
+    StockPage()
+  ];
 
   Future<void> signOut() async {
     await Auth().signOut();
@@ -27,10 +37,6 @@ class _HomePageState extends State<HomePage> {
       "assets/logo.png",
       width: 150,
     );
-  }
-
-  Widget _userId() {
-    return Text(user?.email ?? 'User email');
   }
 
   Widget _signOutButton() {
@@ -49,14 +55,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  int _selectedTab = 0;
 
-  final List _pages = [
-    Text("1"),
-    Text("2"),
-    Text("3"),
-    Text("4")
-  ];
 
   _changeTab(int index) {
     setState(() {
@@ -83,14 +82,13 @@ class _HomePageState extends State<HomePage> {
         showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.add, color: Colors.black54, size: 40), label: 'Game', activeIcon: Icon(Icons.add, color: Colors.red, size: 40)),
+              icon: ImageIcon(AssetImage('assets/game.png'), size: 40), label: 'Game'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.print, color: Colors.black54, size: 40,), label: 'Game', activeIcon: Icon(Icons.print, color: Colors.red, size: 40)),
+              icon: ImageIcon(AssetImage('assets/shop.png'), size: 40), label: 'Game'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.abc, color: Colors.black54, size: 40,), label: 'Game', activeIcon: Icon(Icons.abc, color: Colors.red, size: 40)),
+              icon: ImageIcon(AssetImage('assets/ranking.png'), size: 40), label: 'Game'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_tree_rounded, color: Colors.black54, size: 40,),
-              label: 'Game', activeIcon: Icon(Icons.account_tree_rounded, color: Colors.red, size: 40)),
+              icon: ImageIcon(AssetImage('assets/stock.png'), size: 40), label: 'Game'),
         ],
       ),
     );

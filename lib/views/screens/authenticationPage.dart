@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:torrefacteurk/auth.dart';
+import 'package:torrefacteurk/services/userService.dart';
 
 class AuthenticationPage extends StatefulWidget {
   const AuthenticationPage({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class AuthenticationPage extends StatefulWidget {
 }
 
 class _AuthenticationPageState extends State<AuthenticationPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   String? errorMessage = '';
   bool isLogin = true;
 
@@ -31,10 +34,26 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
     }
   }
 
-  Future createUserWithEmailAndPassword() async {
+  Future<void> createUserWithEmailAndPassword() async {
     try {
-      await Auth().createUserWithEmailAndPassword(
-          email: _controllerEmail.text, password: _controllerPassword.text);
+      UserCredential? userCredential =
+          await _auth.createUserWithEmailAndPassword(
+              email: _controllerEmail.text, password: _controllerPassword.text);
+
+      if (userCredential != null) {
+        String userId = userCredential.user!.uid;
+
+        createUserInDatabase(
+            _controllerFirstName.text,
+            _controllerLastName.text,
+            10,
+            _controllerPseudo.text,
+            _controllerEmail.text,
+            _controllerPassword.text,
+            userId);
+      } else {
+        print("Erreur lors de la création du user");
+      }
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -132,6 +151,22 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
     }
   }
 
+  createUserInDatabase(
+      firstname, lastname, coins, pseudo, email, password, userId) async {
+    final data = {
+      "userId": userId,
+      "email": email,
+      "password": password,
+      "firstname": firstname,
+      "lastname": lastname,
+      "pseudo": pseudo,
+      "coins": coins,
+      "fields": ["fields n°1"]
+    };
+
+    await UserService().createUser(data, userId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,8 +179,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
           height: double.infinity,
           width: double.infinity,
           padding: EdgeInsets.all(10),
-          child: _formAuth()
-      ),
+          child: _formAuth()),
     );
   }
 }

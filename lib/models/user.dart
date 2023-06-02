@@ -1,14 +1,22 @@
 class User {
-  String firstName;
-  String lastName;
-  String email;
-  String password;
-  String pseudo;
+  late String userId;
+  late String firstName;
+  late String lastName;
+  late String email;
+  late String password;
+  late String pseudo;
   int coins = 10;
-  String avatar;
+  late String avatar;
+  List<String> field;
 
-  User({
-    required this.firstName, required this.lastName, required this.email,
-    required this.password, required this.pseudo, required this.coins, required this.avatar
-  });
+  User(
+      {required this.userId,
+      required this.firstName,
+      required this.lastName,
+      required this.email,
+      required this.password,
+      required this.pseudo,
+      required this.coins,
+      required this.avatar,
+      required this.field});
 }
