@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class KafeCardWidget extends StatelessWidget {
   const KafeCardWidget({Key? key}) : super(key: key);
@@ -42,6 +43,7 @@ class KafeCardWidget extends StatelessWidget {
                     style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF96520F)),
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -52,22 +54,25 @@ class KafeCardWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     "Taste",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
-                                  ), Text(
-                                    "Taste",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ), Text(
-                                    "Taste",
+                                  ),
+                                  Text(
+                                    "Bitterness",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    "Taste",
+                                    "Content",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "Smell",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
@@ -91,7 +96,25 @@ class KafeCardWidget extends StatelessWidget {
             ),
             Row(
               children: [
-                Text("Harvest :", style: TextStyle(fontSize: 15)),
+                Text("Harvest :",
+                    style:
+                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: new LinearPercentIndicator(
+                    width: 300.0,
+                    lineHeight: 14.0,
+                    percent: 0.5,
+                    center: Text(
+                      "50.0%",
+                      style: new TextStyle(fontSize: 12.0),
+                    ),
+                    backgroundColor: Colors.grey,
+                    progressColor: Color(0xFF1D433E),
+                    barRadius: Radius.circular(10),
+                  ),
+                )
               ],
             ),
             Container(
@@ -99,8 +122,11 @@ class KafeCardWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(onPressed: () {}, child: Text("Harvest")),
-                  ElevatedButton(onPressed: () {}, child: Text("Dry")),
+                  ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Harvest"),
+                      style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF1D433E))),
+                  ElevatedButton(onPressed: () {}, child: Text("Dry"), style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF1D433E))),
                 ],
               ),
             )

@@ -5,9 +5,9 @@ class FieldService {
   createField(data, userId) async {
     if (FirebaseFirestore.instance != null) {
       DocumentReference userRef = FirebaseFirestore.instance.collection('users').doc(userId);
-
       await userRef.update({
         'fields': FieldValue.arrayUnion([data]),
+        'coins': FieldValue.increment(-1),
       });
     } else {
       print("connexion à firestore échoué");

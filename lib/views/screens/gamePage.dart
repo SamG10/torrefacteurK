@@ -101,8 +101,7 @@ class _GamePageState extends State<GamePage> {
 
   Widget _submitButton() {
     return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF96520F)),
         onPressed: () {
           print("addFields");
           addField();
@@ -129,6 +128,8 @@ class _GamePageState extends State<GamePage> {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) => AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(20.0))),
                           title: const Text('Add other field'),
                           content: new Column(
                             mainAxisSize: MainAxisSize.min,
@@ -161,7 +162,6 @@ class _GamePageState extends State<GamePage> {
               SizedBox(height: 10),
               Expanded(
                 child: ListView.separated(
-                  shrinkWrap: true,
                   itemCount: 4,
                   separatorBuilder: (_, __) => const SizedBox(height: 10),
                   itemBuilder: (context, int index) {
